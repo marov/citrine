@@ -1,0 +1,15 @@
+{
+  "name": "citrine",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "^4.11.2",
+    "express-session": "^1.10.2",
+    "mongodb": "^2.0.15",
+    "mongoose": "^3.8.23",
+    "morgan": "^1.5.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./APP.JS"
+  }
+}
