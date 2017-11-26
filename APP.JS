@@ -75,7 +75,7 @@ router.get('/units/add', function (req, res) {
         unit.name = (typeof req.query.name === 'undefined') ? unit.name : req.query.name;
         unit.symbol = (typeof req.query.symbol === 'undefined') ? unit.symbol : req.query.symbol;
         unit.type = (typeof req.query.type === 'undefined') ? unit.type : req.query.type;
-        unit.conversion = (typeof req.query.conversion === 'undefined') ? unit.conversion : req.query.conversion;
+        unit.conversion = (typeof req.query.conversion === 'number') ? req.query.conversion : unit.conversion;
         unit.save(function(err) {
           console.log('Updated unit in DB: name: ' + unit.name +
             ' symbol: ' + unit.symbol + ' type: ' + unit.type +' conversion factor: ' + unit.conversion);
@@ -110,7 +110,7 @@ var server = app.listen(app.get('port'), function () {
     // Add units to DB
     Unit.findOne({ name: 'minute' }, function(err, unit) {
         if(!unit) {
-          var unit = new Unit({ name: 'minute', symbol: 'min', type: 'time', conversion: '60' });
+          var unit = new Unit({ name: 'minute', symbol: 'min', type: 'time', conversion: 60 });
           unit.save(function(err) {
            console.log('Adding new unit to DB: name: ' + unit.name +
              ' symbol: ' + unit.symbol + ' type: ' + unit.type +' conversion factor: ' + unit.conversion);
@@ -122,7 +122,7 @@ var server = app.listen(app.get('port'), function () {
     });
     Unit.findOne({ name: 'hour' }, function(err, unit) {
         if(!unit) {
-          var unit = new Unit({ name: 'hour', symbol: 'h', type: 'time', conversion: '3600' });
+          var unit = new Unit({ name: 'hour', symbol: 'h', type: 'time', conversion: 3600 });
           unit.save(function(err) {
            console.log('Adding new unit to DB: name: ' + unit.name +
              ' symbol: ' + unit.symbol + ' type: ' + unit.type +' conversion factor: ' + unit.conversion);
@@ -134,7 +134,7 @@ var server = app.listen(app.get('port'), function () {
     });
     Unit.findOne({ name: 'day' }, function(err, unit) {
         if(!unit) {
-          var unit = new Unit({ name: 'day', symbol: 'd', type: 'time', conversion: '86400' });
+          var unit = new Unit({ name: 'day', symbol: 'd', type: 'time', conversion: 86400 });
           unit.save(function(err) {
            console.log('Adding new unit to DB: name: ' + unit.name +
              ' symbol: ' + unit.symbol + ' type: ' + unit.type +' conversion factor: ' + unit.conversion);
@@ -146,8 +146,7 @@ var server = app.listen(app.get('port'), function () {
     });
     Unit.findOne({ name: 'degree' }, function(err, unit) {
         if(!unit) {
-          var unit = new Unit({ name: 'degree', symbol: '°', type: 'Plane angle',
-            conversion: (Math.PI/180).toString() });
+          var unit = new Unit({ name: 'degree', symbol: '°', type: 'Plane angle', conversion: Math.PI/180 });
           unit.save(function(err) {
            console.log('Adding new unit to DB: name: ' + unit.name +
              ' symbol: ' + unit.symbol + ' type: ' + unit.type +' conversion factor: ' + unit.conversion);
@@ -159,8 +158,7 @@ var server = app.listen(app.get('port'), function () {
     });
     Unit.findOne({ symbol: '\'' }, function(err, unit) {
         if(!unit) {
-          var unit = new Unit({ name: '', symbol: '\'', type: 'Plane angle',
-            conversion: (Math.PI/10800).toString() });
+          var unit = new Unit({ name: '', symbol: '\'', type: 'Plane angle', conversion: Math.PI/10800 });
           unit.save(function(err) {
            console.log('Adding new unit to DB: name: ' + unit.name +
              ' symbol: ' + unit.symbol + ' type: ' + unit.type +' conversion factor: ' + unit.conversion);
@@ -172,8 +170,7 @@ var server = app.listen(app.get('port'), function () {
     });
     Unit.findOne({ name: 'second' }, function(err, unit) {
         if(!unit) {
-          var unit = new Unit({ name: 'second', symbol: '"', type: 'Plane angle',
-           conversion: (Math.PI/648000).toString() });
+          var unit = new Unit({ name: 'second', symbol: '"', type: 'Plane angle', conversion: Math.PI/648000 });
           unit.save(function(err) {
            console.log('Adding new unit to DB: name: ' + unit.name +
              ' symbol: ' + unit.symbol + ' type: ' + unit.type +' conversion factor: ' + unit.conversion);
@@ -185,7 +182,7 @@ var server = app.listen(app.get('port'), function () {
     });
     Unit.findOne({ name: 'hectare' }, function(err, unit) {
         if(!unit) {
-          var unit = new Unit({ name: 'hectare', symbol: 'ha', type: 'area', conversion: '10000' });
+          var unit = new Unit({ name: 'hectare', symbol: 'ha', type: 'area', conversion: 10000 });
           unit.save(function(err) {
            console.log('Adding new unit to DB: name: ' + unit.name +
              ' symbol: ' + unit.symbol + ' type: ' + unit.type +' conversion factor: ' + unit.conversion);
@@ -197,7 +194,7 @@ var server = app.listen(app.get('port'), function () {
     });
     Unit.findOne({ name: 'litre' }, function(err, unit) {
         if(!unit) {
-          var unit = new Unit({ name: 'litre', symbol: 'L', type: 'volume', conversion: '0.001' });
+          var unit = new Unit({ name: 'litre', symbol: 'L', type: 'volume', conversion: 0.001 });
           unit.save(function(err) {
            console.log('Adding new unit to DB: name: ' + unit.name +
              ' symbol: ' + unit.symbol + ' type: ' + unit.type +' conversion factor: ' + unit.conversion);
@@ -209,7 +206,7 @@ var server = app.listen(app.get('port'), function () {
     });
     Unit.findOne({ name: 'tonne' }, function(err, unit) {
         if(!unit) {
-          var unit = new Unit({ name: 'tonne', symbol: 't', type: 'mass', conversion: '1000' });
+          var unit = new Unit({ name: 'tonne', symbol: 't', type: 'mass', conversion: 1000 });
           unit.save(function(err) {
            console.log('Adding new unit to DB: name: ' + unit.name +
              ' symbol: ' + unit.symbol + ' type: ' + unit.type +' conversion factor: ' + unit.conversion);
