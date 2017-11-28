@@ -77,7 +77,7 @@ router.get('/units/add', function (req, res) {
         unit.symbol = (typeof req.query.symbol === 'undefined') ? unit.symbol : req.query.symbol;
         unit.type = (typeof req.query.type === 'undefined') ? unit.type : req.query.type;
         unit.si = (typeof req.query.si === 'undefined') ? unit.si : req.query.si;
-        unit.conversion = (typeof req.query.conversion === 'number') ? req.query.conversion : unit.conversion;
+        unit.conversion = (typeof req.query.conversion === 'undefined') ? unit.conversion : req.query.conversion;
         unit.save(function(err) {
           console.log('Updated unit in DB: name: ' + unit.name +
             ' symbol: ' + unit.symbol + ' type: ' + unit.type +' conversion factor: ' + unit.conversion);
